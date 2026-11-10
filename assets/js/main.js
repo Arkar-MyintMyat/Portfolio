@@ -3,7 +3,16 @@
   "use strict";
   var root = document.documentElement;
   root.classList.add("js");
-  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- Always open at the top ----------
+     Don't restore an old scroll position on reload; links to a section (#projects etc.) still work.
+     Smooth scrolling is switched on only after load, so the first paint never animates. */
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  if (!location.hash) window.scrollTo(0, 0);
+  window.addEventListener("load", function () {
+    if (!location.hash) window.scrollTo(0, 0);
+    root.classList.add("smooth-scroll");
+  });
 
   /* ---------- Theme toggle (saved per visitor) ---------- */
   function currentTheme() {
@@ -104,18 +113,6 @@
       if ((e.key === "Enter" || e.key === " ") && img.hasAttribute("data-zoom")) { e.preventDefault(); openBox(img); }
     });
   });
-
-  /* ---------- Gentle reveal for content below the fold only ---------- */
-  if (!reduceMotion && "IntersectionObserver" in window) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (en.isIntersecting) { en.target.classList.remove("pre"); io.unobserve(en.target); }
-      });
-    }, { rootMargin: "0px 0px -8% 0px" });
-    document.querySelectorAll(".reveal").forEach(function (el) {
-      if (el.getBoundingClientRect().top > window.innerHeight) { el.classList.add("pre"); io.observe(el); }
-    });
-  }
 
   /* ---------- Case-study contents + homepage menu: highlight the current section ---------- */
   var tocLinks = document.querySelectorAll(".toc a[href^='#'], .side-nav a[href^='#']");

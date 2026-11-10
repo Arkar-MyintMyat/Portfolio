@@ -4,7 +4,7 @@
 
 My personal portfolio. I'm a software engineering student at the University of Oulu, working on backend systems, applied AI/ML and security. The site presents six projects, each with its own case study covering the problem, my contribution, the technical decisions and the results.
 
-<!-- Live site: add the deployed URL here, e.g. https://arkar-myint-myat.vercel.app -->
+**Live site:** [arkar-myint-myat.vercel.app](https://arkar-myint-myat.vercel.app)
 
 ## Projects featured
 
@@ -47,29 +47,12 @@ assets/
 Any static file server works. With Python:
 
 ```bash
-git clone https://github.com/Arkar-MyintMyat/<repo-name>.git
-cd <repo-name>
+git clone https://github.com/Arkar-MyintMyat/portfolio.git
+cd portfolio
 python -m http.server 8000
 ```
 
 Then open <http://localhost:8000>. Opening `index.html` directly in a browser also works.
-
-## Deploy
-
-It's a static site, so it deploys anywhere without configuration:
-
-- **Vercel:** import the repository, choose the framework preset **Other**, and leave the build settings empty.
-- **Netlify:** connect the repository with an empty build command and publish directory `.`.
-- **GitHub Pages:** Settings → Pages → Deploy from branch → `main` / root.
-
-After the first deploy, set the `og:image` URL in `index.html` to the full address (for example `https://your-site.vercel.app/assets/og-image.png`) so link previews show the image.
-
-## Updating content
-
-- **Screenshots:** each project folder has a `cover.webp` (homepage card and case-study hero) plus the images used in its case study. Replace a file with a WebP of the same name, 1600 px wide. If an image is missing, the page shows a labelled placeholder instead of a broken image.
-- **Resume:** replace `assets/cv/Arkar_Myint_Myat_Resume.pdf`; every Resume link points to it.
-- **Colours and fonts:** edit the tokens at the top of `assets/css/styles.css`.
-- **New project:** copy a project card in `index.html` and one of the pages in `projects/`, then update the Previous / Next links at the bottom of the case studies.
 
 ## Contact
 

@@ -152,7 +152,7 @@
 /* 2. Base ------------------------------------------------------------------ */
 *,*::before,*::after{box-sizing:border-box}
 [hidden]{display:none !important}
-html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 1.5rem);-webkit-text-size-adjust:100%}
+html{scroll-padding-top:calc(var(--nav-h) + 1.5rem);-webkit-text-size-adjust:100%}
 body{
   margin:0;background:var(--bg);color:var(--text);
   font-family:var(--sans);font-size:var(--fs-md);line-height:1.65;
@@ -589,12 +589,10 @@ details.table-toggle summary:hover{color:var(--text)}
 .lightbox .close:hover{background:rgba(255,255,255,.16);color:#fff}
 
 /* 16. Motion --------------------------------------------------------------- */
-.js .reveal{transition:transform .7s cubic-bezier(.2,.7,.2,1)}
-.js .reveal.pre{transform:translateY(18px)}
+html.smooth-scroll{scroll-behavior:smooth}
 @media (prefers-reduced-motion: reduce){
-  html{scroll-behavior:auto}
+  html.smooth-scroll{scroll-behavior:auto}
   *,*::before,*::after{transition-duration:.01ms !important;animation:none !important}
-  .js .reveal.pre{transform:none}
 }
 
 /* 17. Modern layer ----------------------------------------------------------
