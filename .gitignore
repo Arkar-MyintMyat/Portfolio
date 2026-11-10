@@ -1,0 +1,14 @@
+# Raw source images (the site uses the processed copies in assets/)
+WhatsApp Image *.jpeg
+*screenshots/
+
+# Root copies of the CV (the site links assets/cv/)
+/Arkar_Myint_Myat_CV.pdf
+/Arkar_Myint_Myat_Resume.pdf
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/

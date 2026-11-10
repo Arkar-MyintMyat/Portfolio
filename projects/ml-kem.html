@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ML-KEM Legacy Modernization · Arkar Myint Myat</title>
+<meta name="description" content="Case study: migrating a legacy edge-to-cloud IoT system to post-quantum ML-KEM-768 key establishment, with monitoring, CI/CD and 142 automated tests.">
+<meta name="theme-color" content="#0a0f1a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ML-KEM Legacy Modernization · Case study">
+<meta property="og:description" content="Case study: migrating a legacy edge-to-cloud IoT system to post-quantum ML-KEM-768 key establishment, with monitoring, CI/CD and 142 automated tests.">
+<meta property="og:image" content="../assets/projects/ml-kem/cover.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237ea6ff'/%3E%3Ctext x='32' y='41' font-family='monospace' font-size='26' font-weight='700' text-anchor='middle' fill='%2308111f'%3EAM%3C/text%3E%3C/svg%3E">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/css/styles.css">
+<script src="../assets/js/main.js" defer></script>
+</head>
+<body class="page-cs">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="container">
+  <div class="nav-shell">
+    <a class="brand" href="../index.html" aria-label="Arkar Myint Myat, home"><span>Arkar Myint Myat</span></a>
+    <nav aria-label="Primary">
+      <ul class="nav-links" id="nav-links">
+        <li><a href="../index.html#projects" aria-current="page">Projects</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#skills">Skills</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+        <li><a href="../assets/cv/Arkar_Myint_Myat_Resume.pdf" target="_blank" rel="noopener">Resume</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <a class="icon-btn" href="https://github.com/Arkar-MyintMyat" target="_blank" rel="noopener" aria-label="GitHub profile"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg></a>
+      <a class="icon-btn" href="https://linkedin.com/in/arkar-myint-myat07" target="_blank" rel="noopener" aria-label="LinkedIn profile"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Switch colour theme">
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      <a class="btn btn-sm nav-cv" href="../assets/cv/Arkar_Myint_Myat_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="nav-links" aria-expanded="false" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  </div>
+</header>
+
+<div class="container cs-page">
+<aside class="cs-side" aria-label="Site">
+  <div class="cs-side-inner">
+    <a class="btn back-btn" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Back</a>
+    <a class="side-brand" href="../index.html"><img src="../assets/img/arkar.webp" width="720" height="720" alt=""><span><b>Arkar Myint Myat</b><small>Software Engineering · Oulu</small></span></a>
+    <nav class="toc" aria-label="On this page">
+        <ol>
+          <li><a href="#problem">Problem</a></li>
+          <li><a href="#solution">Solution</a></li>
+          <li><a href="#contribution">My contribution</a></li>
+          <li><a href="#implementation">Technical implementation</a></li>
+          <li><a href="#visuals">Visual walkthrough</a></li>
+          <li><a href="#decisions">Challenges &amp; decisions</a></li>
+          <li><a href="#results">Results &amp; lessons</a></li>
+        </ol>
+    </nav>
+    <div class="side-foot">
+      <a class="btn btn-primary btn-sm" href="../assets/cv/Arkar_Myint_Myat_Resume.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>Resume</a>
+      <div class="side-icons">
+        <a class="icon-btn" href="https://github.com/Arkar-MyintMyat" target="_blank" rel="noopener" aria-label="GitHub profile"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg></a>
+        <a class="icon-btn" href="https://linkedin.com/in/arkar-myint-myat07" target="_blank" rel="noopener" aria-label="LinkedIn profile"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+        <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Switch colour theme">
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<main id="main" class="cs-main">
+  <a class="btn back-btn back-btn-inline" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Back</a>
+
+  <header class="cs-hero">
+    <div class="cs-hero-head">
+      <div class="feature-top"><span class="badge">Security · Backend</span><span class="badge">Course project</span></div>
+      <h1>ML-KEM Legacy Modernization</h1>
+      <p class="lede">A legacy edge-to-cloud IoT system (a constrained sensor, an edge gateway and a cloud service) migrated to post-quantum key establishment on the long-haul hop, with monitoring, CI/CD, security tests and a documented rollback policy.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="https://github.com/AnuR01/softwaredevproject_ML-KEM" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+    <dl class="tldr" aria-label="Summary">
+      <div class="tldr-item"><dt><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>Problem</dt><dd>A legacy IoT system with a hardcoded AES key, exposed to “harvest now, decrypt later” attacks.</dd></div>
+      <div class="tldr-item"><dt><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg>What I built</dt><dd>ML-KEM-768 key establishment between gateway and cloud, with monitoring, CI/CD and a no-downgrade policy.</dd></div>
+      <div class="tldr-item"><dt><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Result</dt><dd><strong>142 automated tests</strong>, and no automatic fallback to the legacy path.</dd></div>
+    </dl>
+    <dl class="cs-meta">
+      <div><dt>My role</dt><dd>Led the gateway-to-cloud migration</dd></div>
+      <div><dt>Team</dt><dd>Group project · Software Development, Maintenance &amp; Operations</dd></div>
+      <div><dt>Timeline</dt><dd>7 Sep – 21 Oct 2026</dd></div>
+      <div><dt>Stack</dt><dd>Python, FastAPI, ML-KEM-768, AES-256-GCM, Docker, GitHub Actions</dd></div>
+    </dl>
+    <figure class="shot">
+      <div class="frame">
+        <div class="frame-bar"><i></i><i></i><i></i><span>127.0.0.1:8000 · cloud dashboard</span></div>
+        <div class="frame-media"><img src="../assets/projects/ml-kem/cover.webp" width="1600" height="900" alt="Live cloud dashboard with devices, readings and ML-KEM share" data-label="Hero: the live cloud dashboard (http://127.0.0.1:8000/)" data-zoom></div>
+      </div>
+    </figure>
+  </header>
+
+    <div class="cs-content">
+      <section class="cs-section" id="problem" aria-labelledby="h-problem">
+        <h2 id="h-problem">Problem</h2>
+        <div class="prose">
+          <p class="lead-in">The legacy system had no real key management, and it couldn't simply be replaced.</p>
+          <ul>
+            <li>Devices used a <strong>hardcoded AES-128-CBC pre-shared key</strong>, with no key establishment, no rotation and no authentication.</li>
+            <li>Traffic recorded today could be decrypted later by a quantum-capable attacker: <strong>"harvest now, decrypt later"</strong>.</li>
+            <li>The device is Arduino-class with a <strong>256-byte buffer</strong> and firmware that can't be re-flashed. An ML-KEM-768 public key alone is 1,184 bytes.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="cs-section" id="solution" aria-labelledby="h-solution">
+        <h2 id="h-solution">Solution</h2>
+        <div class="prose"><p>Terminate post-quantum cryptography at the gateway. The device hop stays legacy because it physically has to; the gateway-to-cloud hop, the one exposed to long-term recording, gets the full upgrade.</p></div>
+        <ul class="features-list">
+          <li><b>Post-quantum handshake</b><span>ML-KEM-768 with key pinning, forward secrecy and HKDF-derived session keys.</span></li>
+          <li><b>Authenticated encryption</b><span>AES-256-GCM per reading, with counter nonces that reject replays.</span></li>
+          <li><b>No silent downgrade</b><span>Rolling back to legacy is an explicit operator decision.</span></li>
+          <li><b>Observability</b><span>Live dashboard, health checks, Prometheus metrics, JSON logs.</span></li>
+          <li><b>Automated quality gates</b><span>CI with 142 tests, static analysis and dependency scanning.</span></li>
+        </ul>
+      </section>
+
+      <section class="cs-section" id="contribution" aria-labelledby="h-contribution">
+        <h2 id="h-contribution">My contribution</h2>
+        <div class="split">
+          <div class="role-card me">
+            <h3>What I led and built</h3>
+            <ul>
+              <li>Led the <strong>gateway-to-cloud modernization</strong> using Python, FastAPI, ML-KEM-768 key establishment and AES-256-GCM encryption.</li>
+              <li>Built the <strong>monitoring dashboard</strong>, health checks, metrics and structured logging.</li>
+              <li>Set up <strong>CI/CD with GitHub Actions and Docker</strong>, with pytest security tests, static analysis and dependency scanning.</li>
+              <li>Documented the <strong>migration strategy</strong> and evaluated security and performance trade-offs.</li>
+            </ul>
+          </div>
+          <div class="role-card">
+            <h3>Team / course context</h3>
+            <ul>
+              <li>Group course project; the repository is hosted on a teammate's GitHub account.</li>
+              <li>The baseline legacy system was intentionally built imperfect so its weaknesses could be studied.</li>
+              <li>The course also asked teams to critically evaluate code and design decisions produced by an LLM.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="cs-section" id="implementation" aria-labelledby="h-impl">
+        <h2 id="h-impl">Technical implementation</h2>
+        <div class="diagram" role="img" aria-label="Architecture: legacy device sends AES-128-CBC frames over TCP 9000 to the edge gateway; gateway talks to the cloud service over HTTP 8000 using an ML-KEM-768 handshake and AES-256-GCM per reading.">
+          <p class="diagram-title">Architecture</p>
+          <div class="flow">
+            <div class="node"><b>Legacy device</b><small>256 B buffer · fixed firmware · unchanged</small></div>
+            <div class="edge"><small>TCP 9000 · AES-128-CBC</small></div>
+            <div class="node mine"><b>Edge gateway</b><small>protocol translation · replay check · /health /metrics on 9100</small></div>
+            <div class="edge"><small>HTTP 8000 · ML-KEM-768 + AES-256-GCM</small></div>
+            <div class="node key mine"><b>Cloud service</b><small>FastAPI · key pair · dashboard · /health /metrics</small></div>
+          </div>
+        </div>
+
+        <h3>The ML-KEM channel, step by step</h3>
+        <div class="diagram" role="img" aria-label="Handshake: pin cloud key fingerprint, encapsulate plus one-time key plus HMAC, cloud decapsulates and confirms, both derive keys with HKDF, readings sealed with AES-256-GCM">
+          <div class="flow">
+            <div class="node"><b>1 · Pin</b><small>check cloud key's SHA-256 fingerprint</small></div>
+            <div class="edge"></div>
+            <div class="node"><b>2 · Encapsulate</b><small>+ one-time key (forward secrecy) + HMAC of gateway token</small></div>
+            <div class="edge"></div>
+            <div class="node"><b>3 · Confirm</b><small>cloud decapsulates, encapsulates back, returns tag</small></div>
+            <div class="edge"></div>
+            <div class="node key"><b>4 · Seal</b><small>HKDF keys from both secrets · AES-256-GCM per reading</small></div>
+          </div>
+        </div>
+        <div class="prose">
+          <ul>
+            <li>The gateway token is never sent; an HMAC proves knowledge of it.</li>
+            <li>A per-session message counter is the GCM nonce, so <strong>replays are rejected</strong>. Sessions last an hour or 10,000 messages.</li>
+            <li>The cloud keeps its ML-KEM key pair across restarts so a pinned gateway keeps working.</li>
+          </ul>
+        </div>
+
+        <h3>Operations</h3>
+        <div class="prose">
+          <ul>
+            <li>Dashboard refreshing every two seconds: devices, readings with ML-KEM or legacy badges, share delivered over ML-KEM, and the key fingerprint.</li>
+            <li>Every stored reading records its <code>channel</code> (<code>mlkem</code> or <code>legacy</code>).</li>
+            <li>Prometheus-format <code>/metrics</code> on gateway and cloud (readings per channel, handshakes, rejections); <code>LOG_FORMAT=json</code> structured logs.</li>
+            <li>Docker Compose runs cloud, gateway and device, with a smoke test that verifies a real reading arrives with <code>channel: "mlkem"</code>.</li>
+          </ul>
+        </div>
+
+        <h3>Testing strategy</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Suite</th><th>Covers</th></tr></thead>
+            <tbody>
+              <tr><td><code>test_pqc_channel.py</code></td><td>ML-KEM sizes, handshake, forward secrecy, AES-GCM tamper detection</td></tr>
+              <tr><td><code>test_pqc_integration.py</code></td><td>Real gateway against real cloud: pinning, replay, tampering, session recovery</td></tr>
+              <tr><td><code>test_failures.py</code></td><td>Cloud down, blocked handshake (no fallback), timeouts, lost key, concurrency</td></tr>
+              <tr><td><code>test_observability.py</code></td><td>Metrics format and counters, /health, JSON logs</td></tr>
+              <tr><td><code>test_protocol.py</code> · <code>test_gateway.py</code> · <code>test_cloud.py</code></td><td>Legacy wire format and weaknesses, replay tracking, ingest and APIs</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout info"><b>Security tests as evidence</b>Tests marked <code>security</code> assert that a legacy weakness is real. One forges a reading from another device by tampering with the IV, without knowing the key, and the legacy gateway accepts it.</div>
+      </section>
+
+      <section class="cs-section" id="visuals" aria-labelledby="h-visuals">
+        <h2 id="h-visuals">Visual walkthrough</h2>
+        <div class="gallery">
+          <figure class="shot wide">
+            <div class="frame"><div class="frame-media"><img src="../assets/projects/ml-kem/dashboard.webp" width="1600" height="900" loading="lazy" alt="Dashboard with readings tagged ML-KEM or legacy" data-label="Dashboard detail: readings with ML-KEM / legacy badges" data-zoom></div></div>
+            <figcaption><b>Dashboard detail.</b> The post-quantum channel (ML-KEM-768 + AES-256-GCM, pinned key fingerprint) and every reading tagged by the channel that delivered it.</figcaption>
+          </figure>
+          <figure class="shot wide">
+            <div class="term">
+              <div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>PowerShell · sample local run</span></div>
+<pre><span class="t-prompt">$</span> curl.exe http://127.0.0.1:9100/health        <span class="t-dim"># gateway</span>
+{ <span class="t-key">"status"</span>: <span class="t-str">"ok"</span>, <span class="t-key">"crypto"</span>: <span class="t-str">"mlkem"</span>, <span class="t-key">"cloud_key_pinned"</span>: true,
+  <span class="t-key">"pqc_session"</span>: { <span class="t-key">"active"</span>: true, <span class="t-key">"messages_sent"</span>: 236, <span class="t-key">"renews_in_s"</span>: 3068 },
+  <span class="t-key">"counters"</span>: { <span class="t-key">"frames_received"</span>: 236, <span class="t-key">"frames_rejected"</span>: 0,
+                <span class="t-key">"forwarded_ok"</span>: 236, <span class="t-key">"forward_failed"</span>: 0,
+                <span class="t-key">"replays_dropped"</span>: 0, <span class="t-key">"handshakes_ok"</span>: 1, <span class="t-key">"handshakes_failed"</span>: 0 } }
+
+<span class="t-prompt">$</span> curl.exe http://127.0.0.1:8000/metrics       <span class="t-dim"># cloud, excerpt</span>
+cloud_readings_ingested_total{channel=<span class="t-str">"mlkem"</span>} 238
+cloud_handshakes_total{result=<span class="t-str">"ok"</span>} 1
+cloud_handshake_duration_seconds_sum 0.0117
+cloud_active_sessions 1
+cloud_pqc_key_info{algorithm=<span class="t-str">"ML-KEM-768"</span>,fingerprint=<span class="t-str">"b07d7327…a84758"</span>} 1</pre>
+            </div>
+            <figcaption><b>Observability.</b> Gateway <code>/health</code> and cloud Prometheus <code>/metrics</code> from a local run of about 10 minutes: one ML-KEM handshake, every reading forwarded over the post-quantum channel, and nothing rejected or replayed.</figcaption>
+          </figure>
+          <figure class="shot wide">
+            <div class="frame frame-sm"><div class="frame-media natural"><img src="../assets/projects/ml-kem/ci.webp" width="1600" height="711" loading="lazy" alt="GitHub Actions run with tests, Ruff and pip-audit passing" data-label="GitHub Actions run (tests, Ruff, pip-audit)" data-zoom></div></div>
+            <figcaption><b>CI pipeline.</b> GitHub Actions runs tests on Python 3.11 and 3.12, then static analysis: Ruff lint and security patterns, and a pip-audit dependency scan.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="cs-section" id="decisions" aria-labelledby="h-decisions">
+        <h2 id="h-decisions">Challenges &amp; decisions</h2>
+        <div class="decisions">
+          <article class="decision">
+            <h3>The device can't run ML-KEM</h3>
+            <dl>
+              <div><dt>Challenge</dt><dd>The public key (1,184 B) is over four times the device's 256-byte buffer, and the firmware can't be updated.</dd></div>
+              <div><dt>Decision</dt><dd>Terminate post-quantum crypto at the gateway and protect the long-haul hop.</dd></div>
+              <div><dt>Why</dt><dd>That hop is the one an attacker can record at scale and decrypt later.</dd></div>
+            </dl>
+          </article>
+          <article class="decision">
+            <h3>Fallback could become a downgrade attack</h3>
+            <dl>
+              <div><dt>Challenge</dt><dd>Automatically falling back to legacy when the handshake fails lets an attacker force the weak path just by blocking the handshake.</dd></div>
+              <div><dt>Decision</dt><dd>No automatic fallback. Rollback is an operator setting (<code>--crypto legacy</code> / <code>CRYPTO_MODE=legacy</code>), and the cloud can retire legacy ingest entirely.</dd></div>
+            </dl>
+          </article>
+          <article class="decision">
+            <h3>Pure-Python ML-KEM</h3>
+            <dl>
+              <div><dt>Trade-off</dt><dd>kyber-py is easy to integrate but not constant-time.</dd></div>
+              <div><dt>Decision</dt><dd>Accept it for the course project, document it as unsuitable for production, and isolate it so swapping in liboqs changes only <code>pqc_channel/channel.py</code>.</dd></div>
+            </dl>
+          </article>
+        </div>
+      </section>
+
+      <section class="cs-section" id="results" aria-labelledby="h-results">
+        <h2 id="h-results">Results &amp; lessons</h2>
+        <div class="kpis">
+          <div class="kpi win"><b>142</b><span>automated tests, including security and failure suites</span></div>
+          <div class="kpi"><b>0</b><span>automatic downgrade paths to legacy crypto</span></div>
+          <div class="kpi"><b>9.7 ms</b><span>median device-to-cloud latency, legacy baseline (33.5 ms p95)</span></div>
+          <div class="kpi"><b>98 B</b><span>legacy frame on the wire, 38.3% of the device buffer</span></div>
+        </div>
+        <div class="callout"><b>Note</b>Latency and frame size are <em>pre-migration baselines</em>, measured on 17 September 2026 so the migration's cost could be compared against real numbers.</div>
+        <div class="prose">
+          <h3>What I learned</h3>
+          <ul>
+            <li>Migrations are mostly about constraints and failure modes: the hardest decisions were where to stop and what not to fall back to.</li>
+            <li>Writing tests that prove a weakness exists makes security findings concrete instead of theoretical.</li>
+          </ul>
+          <h3>What I'd improve next</h3>
+          <ul>
+            <li>Replace kyber-py with a constant-time implementation such as liboqs.</li>
+            <li>Publish the post-migration latency and throughput next to the baseline.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="next" aria-label="More projects">
+        <a href="stakes.html"><span>← Previous</span><b>Stakes by Kaleva</b></a>
+        <a class="to-next" href="transformer.html"><span>Next project →</span><b>Transformer from Scratch</b></a>
+      </nav>
+      <div class="cs-end"><a class="btn back-btn" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Back</a></div>
+    </div>
+</main>
+</div>
+
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <span>© <span data-year>2026</span> Arkar Myint Myat · Oulu, Finland</span>
+    <nav aria-label="Footer"><a href="../index.html#projects">Projects</a><a href="../index.html#contact">Contact</a><a href="../assets/cv/Arkar_Myint_Myat_Resume.pdf" target="_blank" rel="noopener">Resume</a></nav>
+  </div>
+</footer>
+</body>
+</html>

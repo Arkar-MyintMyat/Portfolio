@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Explainable Heart Disease Risk Prediction · Arkar Myint Myat</title>
+<meta name="description" content="Case study: Bachelor's thesis comparing Random Forest and Logistic Regression for heart disease risk, explained with SHAP and LIME. 0.950 ROC-AUC on the test set.">
+<meta name="theme-color" content="#0a0f1a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Explainable Heart Disease Risk Prediction · Case study">
+<meta property="og:description" content="Case study: Bachelor's thesis comparing Random Forest and Logistic Regression for heart disease risk, explained with SHAP and LIME. 0.950 ROC-AUC on the test set.">
+<meta property="og:image" content="../assets/projects/heart-disease/cover.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237ea6ff'/%3E%3Ctext x='32' y='41' font-family='monospace' font-size='26' font-weight='700' text-anchor='middle' fill='%2308111f'%3EAM%3C/text%3E%3C/svg%3E">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/css/styles.css">
+<script src="../assets/js/main.js" defer></script>
+</head>
+<body class="page-cs">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="container">
+  <div class="nav-shell">
+    <a class="brand" href="../index.html" aria-label="Arkar Myint Myat, home"><span>Arkar Myint Myat</span></a>
+    <nav aria-label="Primary">
+      <ul class="nav-links" id="nav-links">
+        <li><a href="../index.html#projects" aria-current="page">Projects</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#skills">Skills</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+        <li><a href="../assets/cv/Arkar_Myint_Myat_Resume.pdf" target="_blank" rel="noopener">Resume</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <a class="icon-btn" href="https://github.com/Arkar-MyintMyat" target="_blank" rel="noopener" aria-label="GitHub profile"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg></a>
+      <a class="icon-btn" href="https://linkedin.com/in/arkar-myint-myat07" target="_blank" rel="noopener" aria-label="LinkedIn profile"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Switch colour theme">
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      <a class="btn btn-sm nav-cv" href="../assets/cv/Arkar_Myint_Myat_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="nav-links" aria-expanded="false" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  </div>
+</header>
+
+<div class="container cs-page">
+<aside class="cs-side" aria-label="Site">
+  <div class="cs-side-inner">
+    <a class="btn back-btn" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Back</a>
+    <a class="side-brand" href="../index.html"><img src="../assets/img/arkar.webp" width="720" height="720" alt=""><span><b>Arkar Myint Myat</b><small>Software Engineering · Oulu</small></span></a>
+    <nav class="toc" aria-label="On this page">
+        <ol>
+          <li><a href="#problem">Problem</a></li>
+          <li><a href="#solution">Approach</a></li>
+          <li><a href="#contribution">My contribution</a></li>
+          <li><a href="#implementation">Technical implementation</a></li>
+          <li><a href="#visuals">Results &amp; visuals</a></li>
+          <li><a href="#decisions">Decisions</a></li>
+          <li><a href="#results">Lessons</a></li>
+        </ol>
+    </nav>
+    <div class="side-foot">
+      <a class="btn btn-primary btn-sm" href="../assets/cv/Arkar_Myint_Myat_Resume.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>Resume</a>
+      <div class="side-icons">
+        <a class="icon-btn" href="https://github.com/Arkar-MyintMyat" target="_blank" rel="noopener" aria-label="GitHub profile"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg></a>
+        <a class="icon-btn" href="https://linkedin.com/in/arkar-myint-myat07" target="_blank" rel="noopener" aria-label="LinkedIn profile"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+        <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Switch colour theme">
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<main id="main" class="cs-main">
+  <a class="btn back-btn back-btn-inline" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Back</a>
+
+  <header class="cs-hero">
+    <div class="cs-hero-head">
+      <div class="feature-top"><span class="badge">Machine Learning</span><span class="badge">Bachelor's thesis</span></div>
+      <h1>Explainable Heart Disease Risk Prediction</h1>
+      <p class="lede">A machine learning pipeline comparing Random Forest and Logistic Regression for heart disease risk, then asking why each model predicts what it does, using SHAP, LIME and model coefficients.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="https://oulurepo.oulu.fi/handle/10024/63492" target="_blank" rel="noopener">Read the thesis <span aria-hidden="true">↗</span></a>
+        <a class="btn" href="https://github.com/Arkar-MyintMyat/Heartdisease_riskprediction_experiment" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+    <dl class="tldr" aria-label="Summary">
+      <div class="tldr-item"><dt><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>Problem</dt><dd>In medicine, an accurate prediction isn’t enough; clinicians need to know why.</dd></div>
+      <div class="tldr-item"><dt><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg>What I built</dt><dd>A Random Forest vs Logistic Regression pipeline, explained with SHAP, LIME and coefficients.</dd></div>
+      <div class="tldr-item"><dt><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Result</dt><dd><strong>0.950 ROC-AUC</strong> and <strong>90.5% recall</strong>; all three methods agreed on the top risk factors.</dd></div>
+    </dl>
+    <dl class="cs-meta">
+      <div><dt>My role</dt><dd>Author: full pipeline, analysis and write-up</dd></div>
+      <div><dt>Team</dt><dd>Individual (thesis)</dd></div>
+      <div><dt>Timeline</dt><dd>Jan – May 2026</dd></div>
+      <div><dt>Stack</dt><dd>Python, scikit-learn, SHAP, LIME, pandas</dd></div>
+    </dl>
+    <figure class="shot">
+      <div class="frame">
+        <div class="frame-bar"><i></i><i></i><i></i><span>heart_disease_riskprediction_experiment.ipynb</span></div>
+        <div class="frame-media contain"><img src="../assets/projects/heart-disease/cover.webp" width="1600" height="900" alt="SHAP beeswarm plot showing global feature importance" data-label="Hero: SHAP beeswarm plot" data-zoom></div>
+      </div>
+    </figure>
+  </header>
+
+    <div class="cs-content">
+      <section class="cs-section" id="problem" aria-labelledby="h-problem">
+        <h2 id="h-problem">Problem</h2>
+        <div class="prose">
+          <p class="lead-in">In medicine, an accurate model isn't enough; clinicians need to know why it made a prediction.</p>
+          <p>The thesis asks which model predicts heart disease risk best, and whether different explanation methods agree on <strong>what drives each prediction</strong>, both globally and for an individual patient.</p>
+        </div>
+      </section>
+
+      <section class="cs-section" id="solution" aria-labelledby="h-solution">
+        <h2 id="h-solution">Approach</h2>
+        <ul class="features-list">
+          <li><b>Dataset</b><span>UCI Cleveland Heart Disease: 303 patients, 13 clinical features, binary target.</span></li>
+          <li><b>Models</b><span>Random Forest (216-combination grid) and Logistic Regression in a scaling pipeline (20 combinations).</span></li>
+          <li><b>Global explanations</b><span>SHAP beeswarm and standardised coefficients.</span></li>
+          <li><b>Local explanations</b><span>SHAP and LIME waterfalls for a single test patient.</span></li>
+        </ul>
+      </section>
+
+      <section class="cs-section" id="contribution" aria-labelledby="h-contribution">
+        <h2 id="h-contribution">My contribution</h2>
+        <div class="role-card me">
+          <h3>Individual thesis work</h3>
+          <ul>
+            <li>Developed and evaluated the ML pipeline using <strong>Logistic Regression and Random Forest</strong>.</li>
+            <li>Data preprocessing, feature scaling, <strong>hyperparameter tuning</strong>, and evaluation with accuracy, precision, recall, F1 and ROC-AUC.</li>
+            <li>Applied <strong>SHAP and LIME</strong> to explain individual predictions and analyse global feature importance.</li>
+            <li>Compared predictive performance and explanation consistency across methods.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="cs-section" id="implementation" aria-labelledby="h-impl">
+        <h2 id="h-impl">Technical implementation</h2>
+        <div class="diagram" role="img" aria-label="Pipeline: clean, impute, explore, stratified split, tune on fixed validation set for recall, evaluate on test set, explain with SHAP, LIME and coefficients">
+          <p class="diagram-title">Experiment pipeline</p>
+          <div class="flow">
+            <div class="node"><b>Clean</b><small>"?" → NaN · impossible values · duplicates</small></div>
+            <div class="edge"></div>
+            <div class="node"><b>Impute</b><small>median / mode</small></div>
+            <div class="edge"></div>
+            <div class="node"><b>Split</b><small>stratified 70/15/15 → 212/45/46</small></div>
+            <div class="edge"></div>
+            <div class="node key"><b>Tune</b><small>GridSearchCV + PredefinedSplit · scored on recall</small></div>
+            <div class="edge"></div>
+            <div class="node"><b>Evaluate</b><small>untouched test set</small></div>
+            <div class="edge"></div>
+            <div class="node key"><b>Explain</b><small>SHAP · LIME · coefficients</small></div>
+          </div>
+        </div>
+        <div class="prose">
+          <ul>
+            <li>Physiologically impossible values (non-positive age, blood pressure, cholesterol or max heart rate; negative ST depression) marked missing; categorical codes range-checked.</li>
+            <li>A second Logistic Regression with <em>manual</em> scaling reproduces the pipeline result exactly (max coefficient difference 0.0), confirming there's no leakage from scaling.</li>
+            <li>All random seeds fixed (<code>random_state=42</code>) so results reproduce exactly.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="cs-section" id="visuals" aria-labelledby="h-visuals">
+        <h2 id="h-visuals">Results &amp; visuals</h2>
+        <div class="chart">
+          <div class="chart-head">
+            <h3>Test-set performance (46 patients)</h3>
+            <ul class="legend"><li><i class="s1"></i>Logistic Regression</li><li><i class="s2"></i>Random Forest</li></ul>
+          </div>
+          <div class="bars" role="img" aria-label="Scores from 0 to 1. Recall: LR 0.905, RF 0.857. ROC-AUC: 0.950 vs 0.903. Accuracy: 0.870 vs 0.826. F1: 0.864 vs 0.818. Precision: 0.826 vs 0.783.">
+            <div class="bar-group"><span>Recall</span><div class="bar-pair">
+              <div class="bar-track"><span class="bar s1" style="width:90.5%" tabindex="0" data-tip="Logistic Regression · Recall 0.905"><span class="bar-val">0.905</span></span></div>
+              <div class="bar-track"><span class="bar s2" style="width:85.7%" tabindex="0" data-tip="Random Forest · Recall 0.857"><span class="bar-val">0.857</span></span></div></div></div>
+            <div class="bar-group"><span>ROC-AUC</span><div class="bar-pair">
+              <div class="bar-track"><span class="bar s1" style="width:95%" tabindex="0" data-tip="Logistic Regression · ROC-AUC 0.950"><span class="bar-val">0.950</span></span></div>
+              <div class="bar-track"><span class="bar s2" style="width:90.3%" tabindex="0" data-tip="Random Forest · ROC-AUC 0.903"><span class="bar-val">0.903</span></span></div></div></div>
+            <div class="bar-group"><span>Accuracy</span><div class="bar-pair">
+              <div class="bar-track"><span class="bar s1" style="width:87%" tabindex="0" data-tip="Logistic Regression · Accuracy 0.870"><span class="bar-val">0.870</span></span></div>
+              <div class="bar-track"><span class="bar s2" style="width:82.6%" tabindex="0" data-tip="Random Forest · Accuracy 0.826"><span class="bar-val">0.826</span></span></div></div></div>
+            <div class="bar-group"><span>F1-score</span><div class="bar-pair">
+              <div class="bar-track"><span class="bar s1" style="width:86.4%" tabindex="0" data-tip="Logistic Regression · F1 0.864"><span class="bar-val">0.864</span></span></div>
+              <div class="bar-track"><span class="bar s2" style="width:81.8%" tabindex="0" data-tip="Random Forest · F1 0.818"><span class="bar-val">0.818</span></span></div></div></div>
+            <div class="bar-group"><span>Precision</span><div class="bar-pair">
+              <div class="bar-track"><span class="bar s1" style="width:82.6%" tabindex="0" data-tip="Logistic Regression · Precision 0.826"><span class="bar-val">0.826</span></span></div>
+              <div class="bar-track"><span class="bar s2" style="width:78.3%" tabindex="0" data-tip="Random Forest · Precision 0.783"><span class="bar-val">0.783</span></span></div></div></div>
+          </div>
+          <div class="axis" aria-hidden="true"><span></span><div><span>0</span><span>0.25</span><span>0.50</span><span>0.75</span><span>1.0</span></div></div>
+        </div>
+        <details class="table-toggle">
+          <summary>View as a table</summary>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Metric</th><th class="num">Random Forest</th><th class="num">Logistic Regression</th></tr></thead>
+              <tbody>
+                <tr><td>Accuracy</td><td class="num">0.826</td><td class="num best">0.870</td></tr>
+                <tr><td>Precision</td><td class="num">0.783</td><td class="num best">0.826</td></tr>
+                <tr><td>Recall</td><td class="num">0.857</td><td class="num best">0.905</td></tr>
+                <tr><td>F1-score</td><td class="num">0.818</td><td class="num best">0.864</td></tr>
+                <tr><td>ROC-AUC</td><td class="num">0.903</td><td class="num best">0.950</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+
+        <h3>What drives the prediction</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Rank</th><th>Feature</th><th class="num">LR coefficient</th><th>Meaning</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td><code>ca</code></td><td class="num">+0.282</td><td>Major vessels coloured by fluoroscopy</td></tr>
+              <tr><td>2</td><td><code>thal</code></td><td class="num">+0.269</td><td>Thalassemia result</td></tr>
+              <tr><td>3</td><td><code>cp</code></td><td class="num">+0.203</td><td>Chest pain type</td></tr>
+              <tr><td>4</td><td><code>exang</code></td><td class="num">+0.191</td><td>Exercise-induced angina</td></tr>
+              <tr><td>5</td><td><code>oldpeak</code></td><td class="num">+0.183</td><td>ST depression from exercise</td></tr>
+              <tr><td>6</td><td><code>thalach</code></td><td class="num">−0.181</td><td>Maximum heart rate achieved (higher → lower risk)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="gallery">
+          <figure class="shot wide">
+            <div class="frame frame-sm"><div class="frame-media natural"><img src="../assets/projects/heart-disease/shap-vs-lime.webp" width="1600" height="646" loading="lazy" alt="Side-by-side SHAP and LIME local waterfall plots for the same patient, Random Forest model. Both rank thal, cp and ca as the largest contributors." data-label="SHAP vs LIME, same patient" data-zoom></div></div>
+            <figcaption><b>Same patient, two explainers.</b> SHAP and LIME local explanations for the Random Forest agree on the biggest drivers (<code>thal</code> pushes toward disease, while <code>cp</code> and <code>ca</code> push away) but differ in magnitude. That's why the thesis compares methods instead of trusting one.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="cs-section" id="decisions" aria-labelledby="h-decisions">
+        <h2 id="h-decisions">Decisions</h2>
+        <div class="decisions">
+          <article class="decision">
+            <h3>Optimise for recall</h3>
+            <dl>
+              <div><dt>Why</dt><dd>Missing a real disease case is the costlier error in a medical setting, so tuning was scored on recall rather than accuracy.</dd></div>
+            </dl>
+          </article>
+          <article class="decision">
+            <h3>A fixed validation set instead of random CV folds</h3>
+            <dl>
+              <div><dt>Why</dt><dd><code>PredefinedSplit</code> keeps hyperparameter choice on one fixed validation set, and the test set stays untouched until the final evaluation.</dd></div>
+            </dl>
+          </article>
+          <article class="decision">
+            <h3>Choosing Logistic Regression</h3>
+            <dl>
+              <div><dt>Why</dt><dd>It won on every metric, and its coefficients are directly interpretable without a post-hoc explainer.</dd></div>
+            </dl>
+          </article>
+        </div>
+      </section>
+
+      <section class="cs-section" id="results" aria-labelledby="h-results">
+        <h2 id="h-results">Lessons</h2>
+        <div class="kpis">
+          <div class="kpi win"><b>0.950</b><span>ROC-AUC, Logistic Regression, held-out test set</span></div>
+          <div class="kpi win"><b>90.5%</b><span>recall: fewer missed disease cases</span></div>
+          <div class="kpi"><b>3 methods</b><span>SHAP, LIME and coefficients agreed on top features</span></div>
+        </div>
+        <div class="prose">
+          <h3>What I learned</h3>
+          <ul>
+            <li>A simpler model can beat a more complex one and be easier to explain.</li>
+            <li>Comparing several explanation methods is a useful sanity check on each of them.</li>
+          </ul>
+          <h3>What I'd improve next</h3>
+          <ul>
+            <li>Validate on a larger or external dataset; the test set has only 46 patients.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="next" aria-label="More projects">
+        <a href="transformer.html"><span>← Previous</span><b>Transformer from Scratch</b></a>
+        <a class="to-next" href="migrainemsense.html"><span>Next project →</span><b>MigraineMSense</b></a>
+      </nav>
+      <div class="cs-end"><a class="btn back-btn" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Back</a></div>
+    </div>
+</main>
+</div>
+
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <span>© <span data-year>2026</span> Arkar Myint Myat · Oulu, Finland</span>
+    <nav aria-label="Footer"><a href="../index.html#projects">Projects</a><a href="../index.html#contact">Contact</a><a href="../assets/cv/Arkar_Myint_Myat_Resume.pdf" target="_blank" rel="noopener">Resume</a></nav>
+  </div>
+</footer>
+</body>
+</html>

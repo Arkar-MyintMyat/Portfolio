@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Arkar Myint Myat</title>
+<meta name="description" content="Arkar Myint Myat — software engineering student at the University of Oulu building backend systems, applied AI/ML and post-quantum secure infrastructure. Projects, case studies and CV.">
+<meta name="author" content="Arkar Myint Myat">
+<meta name="theme-color" content="#0a0f1a">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Arkar Myint Myat · Software Engineering Portfolio">
+<meta property="og:description" content="Backend systems, applied AI/ML and post-quantum security. Case studies of Stakes (2nd place, JunctionX Oulu 2026), ML-KEM modernization, a Transformer from scratch and more.">
+<!-- TODO after deploying: replace with the full URL, e.g. https://your-site.vercel.app/assets/og-image.png -->
+<meta property="og:image" content="assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237ea6ff'/%3E%3Ctext x='32' y='41' font-family='monospace' font-size='26' font-weight='700' text-anchor='middle' fill='%2308111f'%3EAM%3C/text%3E%3C/svg%3E">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/css/styles.css">
+<script src="assets/js/main.js" defer></script>
+</head>
+<body class="page-home">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="container">
+  <div class="nav-shell">
+    <a class="brand" href="#top" aria-label="Arkar Myint Myat, home"><span>Arkar Myint Myat</span></a>
+    <nav aria-label="Primary">
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="assets/cv/Arkar_Myint_Myat_Resume.pdf" target="_blank" rel="noopener">Resume</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <a class="icon-btn" href="https://github.com/Arkar-MyintMyat" target="_blank" rel="noopener" aria-label="GitHub profile"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg></a>
+      <a class="icon-btn" href="https://linkedin.com/in/arkar-myint-myat07" target="_blank" rel="noopener" aria-label="LinkedIn profile"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Switch colour theme">
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      <a class="btn btn-sm nav-cv" href="assets/cv/Arkar_Myint_Myat_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="nav-links" aria-expanded="false" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  </div>
+</header>
+
+<main id="main">
+<div class="container home" id="top">
+
+  <!-- ============================== INTRO (sticky on desktop) ============================== -->
+  <section class="hero home-side" aria-labelledby="hero-title">
+    <div class="side-inner">
+      <div class="side-id">
+        <div class="portrait"><img src="assets/img/arkar.webp" width="720" height="720" alt="Portrait of Arkar Myint Myat" fetchpriority="high"></div>
+        <div class="side-id-text">
+          <p class="availability"><span class="dot" aria-hidden="true"></span>Looking for software engineering internships for summer 2027</p>
+          <div class="hero-meta">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Oulu, Finland</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>Software Engineering, University of Oulu</span>
+          </div>
+        </div>
+      </div>
+      <h1 id="hero-title">Arkar Myint Myat</h1>
+      <p class="hero-headline">I turn ideas into working <span class="accent">backend systems and AI</span>.</p>
+      <p class="hero-lede">I build APIs, machine learning pipelines and secure systems, and test them until the results hold up. Recently: a post-quantum security upgrade for a legacy IoT system, and a Transformer built from scratch.</p>
+      <nav class="side-nav" aria-label="Sections">
+        <ol>
+            <li><a href="#about">About me</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ol>
+      </nav>
+      <div class="side-foot">
+        <a class="btn btn-primary" href="assets/cv/Arkar_Myint_Myat_Resume.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>View Resume</a>
+        <div class="side-icons">
+          <a class="icon-btn" href="https://github.com/Arkar-MyintMyat" target="_blank" rel="noopener" aria-label="GitHub profile"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg></a>
+          <a class="icon-btn" href="https://linkedin.com/in/arkar-myint-myat07" target="_blank" rel="noopener" aria-label="LinkedIn profile"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+          <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Switch colour theme">
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="home-main">
+
+  <!-- ============================== ABOUT ============================== -->
+  <section class="section" id="about" aria-labelledby="about-title">
+    <div class="section-head">
+      <h2 id="about-title">About me</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>I'm studying in the combined <strong>Bachelor's and Master's programme in Software Engineering and Information Systems</strong> at the University of Oulu. Most of my work sits where backend engineering meets machine learning and security: APIs that serve model output, ML pipelines that need to be trusted, and systems that have to stay safe while they change.</p>
+        <p>I like taking an idea from a paper or a spec and turning it into a working prototype: evaluating the algorithms, measuring the results and documenting the trade-offs along the way. I'm looking for software engineering internships for summer 2027.</p>
+        <ul class="proof" aria-label="Highlights">
+      <li><b>2nd place</b><span>JunctionX Oulu 2026, Kaleva Media challenge</span></li>
+      <li><b>On Steam</b><span>King of Cards, shipped with a team of three</span></li>
+    </ul>
+      </div>
+      <div class="side-block reveal">
+        <h3 class="label">Education &amp; experience</h3>
+        <ol class="timeline">
+          <li><span class="when">2023 – 2028</span><h3>BSc + MSc, Software Engineering and Information Systems</h3><p>University of Oulu, Finland</p></li>
+          <li><span class="when">Oct 2026</span><h3>JunctionX Oulu 2026: 2nd place</h3><p>Beyond the Scoreboard challenge, Kaleva Media</p></li>
+          <li><span class="when">Nov 2025</span><h3>Junction 2025 participant</h3><p>Built MigraineMSense with a team</p></li>
+          <li><span class="when">Nov 2024</span><h3>Shipped a game on Steam: King of Cards</h3><p>Unity game built with a team of three. <a href="projects/king-of-cards.html">Case study</a></p></li>
+          <li><span class="when">Mar – May 2024</span><h3>Student Representative, OfferHolder Hub</h3><p>Produced videos for prospective international students. <a href="https://youtu.be/lR3sSJ2xziI" target="_blank" rel="noopener">Watch ↗</a></p></li>
+        </ol>
+        <h3 class="label">Languages</h3>
+        <div class="langs"><div><b>English</b><span>Fluent</span></div><div><b>Burmese</b><span>Native</span></div><div><b>Finnish</b><span>Basic (A1.3)</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== SKILLS ============================== -->
+  <section class="section" id="skills" aria-labelledby="skills-title">
+    <div class="section-head">
+      <h2 id="skills-title">Skills</h2>
+    </div>
+    <div class="skills">
+      <div class="skill reveal"><h3>Programming languages</h3><ul class="tags"><li class="tag">Python</li><li class="tag">Java</li><li class="tag">C</li><li class="tag">TypeScript</li><li class="tag">JavaScript</li><li class="tag">PHP</li></ul></div>
+      <div class="skill reveal"><h3>Backend &amp; APIs</h3><ul class="tags"><li class="tag">FastAPI</li><li class="tag">REST APIs</li><li class="tag">Express.js</li><li class="tag">Spring Boot</li><li class="tag">Laravel</li></ul></div>
+      <div class="skill reveal"><h3>Machine learning &amp; AI</h3><ul class="tags"><li class="tag">PyTorch</li><li class="tag">TensorFlow</li><li class="tag">scikit-learn</li><li class="tag">SHAP / LIME</li><li class="tag">LLM integration</li><li class="tag">XGBoost</li><li class="tag">RAG</li><li class="tag">MCP</li></ul></div>
+      <div class="skill reveal"><h3>Frontend &amp; mobile</h3><ul class="tags"><li class="tag">React</li><li class="tag">React Native</li><li class="tag">Expo</li><li class="tag">Angular</li><li class="tag">HTML / CSS</li><li class="tag">Bootstrap</li></ul></div>
+      <div class="skill reveal"><h3>Databases</h3><ul class="tags"><li class="tag">Supabase</li><li class="tag">PostgreSQL</li><li class="tag">MySQL</li><li class="tag">MongoDB</li></ul></div>
+      <div class="skill reveal"><h3>DevOps &amp; testing</h3><ul class="tags"><li class="tag">Git</li><li class="tag">GitHub Actions</li><li class="tag">CI/CD</li><li class="tag">Docker</li><li class="tag">Kubernetes</li><li class="tag">pytest</li><li class="tag">Ruff</li><li class="tag">GitLab</li><li class="tag">Jira</li></ul></div>
+      <div class="skill reveal"><h3>Security</h3><ul class="tags"><li class="tag">ML-KEM-768</li><li class="tag">AES-256-GCM</li><li class="tag">HKDF</li><li class="tag">Key pinning</li><li class="tag">Dependency scanning</li></ul></div>
+    </div>
+  </section>
+
+  <!-- ============================== PROJECTS ============================== -->
+  <section class="section" id="projects" aria-labelledby="projects-title">
+    <div class="section-head">
+      <h2 id="projects-title">Projects</h2>
+      <p>Each project links to a case study covering the problem, my part in it, the technical decisions and the results.</p>
+    </div>
+
+    <div class="featured">
+      <!-- 01 Stakes (lead) -->
+      <article class="feature feature-lead reveal" aria-labelledby="f-stakes">
+        <a class="feature-media" href="projects/stakes.html" tabindex="-1" aria-hidden="true">
+          <div class="frame">
+            <div class="frame-bar"><i></i><i></i><i></i><span>panokset.vercel.app</span></div>
+            <div class="frame-media"><img src="assets/projects/stakes/cover.webp" width="1600" height="900" alt="Stakes for Kärpät 2–3 Pelicans: the Matchstake chart shows Pelicans' playoff chance moving from 68% to 73% goal by goal, beside the Goalwave Liiga playoff table showing how every team's chance changed" data-label="Cover: Matchstake and Goalwave"></div>
+          </div>
+        </a>
+        <div class="feature-body">
+          <div class="feature-intro">
+            <div class="feature-top"><span class="badge">Full Stack · AI</span><span class="badge badge-win"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg>2nd place · JunctionX Oulu 2026</span></div>
+            <h3 id="f-stakes"><a href="projects/stakes.html">Stakes by Kaleva</a></h3>
+            <p class="feature-summary">Sports sites show the score but not what it meant. Stakes re-simulates the rest of the Liiga season after every goal, shows how each team's playoff chance moved, and generates fan stories where code checks every number.</p>
+            <div class="btn-row">
+              <a class="btn btn-primary" href="projects/stakes.html">View Case Study</a>
+              <a class="btn" href="https://panokset.vercel.app/" target="_blank" rel="noopener">Live Demo <span aria-hidden="true">↗</span></a>
+              <a class="btn" href="https://github.com/Arkar-MyintMyat/JunctionXOulu-Hackathon-" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+          <dl class="facts">
+            <div class="fact"><dt>My role</dt><dd>Backend services, the Matchstake simulation logic, sports-data API integration, and AI-generated articles with fact-checking rules.</dd></div>
+            <div class="fact"><dt>Built with</dt><dd><ul class="tags"><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">LLM API</li><li class="tag">Liiga API</li><li class="tag">Next.js</li></ul></dd></div>
+            <div class="fact"><dt>Result</dt><dd><strong>10,000</strong> simulated seasons per match moment, and the AI never writes a number itself.</dd></div>
+            <div class="fact"><dt>Team</dt><dd>3 people, Oct 2026</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <!-- 02 ML-KEM -->
+      <article class="feature reveal" aria-labelledby="f-mlkem">
+        <a class="feature-media" href="projects/ml-kem.html" tabindex="-1" aria-hidden="true">
+          <div class="frame">
+            <div class="frame-bar"><i></i><i></i><i></i><span>127.0.0.1:8000 · cloud dashboard</span></div>
+            <div class="frame-media"><img src="assets/projects/ml-kem/cover.webp" width="1600" height="900" loading="lazy" alt="Cloud telemetry dashboard: 100% of readings delivered over ML-KEM, the ML-KEM-768 channel details and latest readings tagged ML-KEM" data-label="Cover: cloud telemetry dashboard"></div>
+          </div>
+        </a>
+        <div class="feature-body">
+          <div class="feature-top"><span class="badge">Security · Backend</span></div>
+          <h3 id="f-mlkem"><a href="projects/ml-kem.html">ML-KEM Legacy Modernization</a></h3>
+          <p class="feature-summary">A legacy IoT system with a hardcoded AES key, upgraded to post-quantum key establishment between gateway and cloud, without a silent fallback to the old path.</p>
+          <dl class="facts">
+            <div class="fact"><dt>My role</dt><dd>Led the gateway-to-cloud migration, monitoring, and CI/CD.</dd></div>
+            <div class="fact"><dt>Built with</dt><dd><ul class="tags"><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">ML-KEM-768</li><li class="tag">Docker</li><li class="tag">GitHub Actions</li></ul></dd></div>
+            <div class="fact"><dt>Result</dt><dd><strong>142 automated tests</strong>, including tests that prove the legacy weaknesses are exploitable.</dd></div>
+          </dl>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="projects/ml-kem.html">View Case Study</a>
+            <a class="btn" href="https://github.com/AnuR01/softwaredevproject_ML-KEM" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 03 Transformer -->
+      <article class="feature reveal" aria-labelledby="f-transformer">
+        <a class="feature-media" href="projects/transformer.html" tabindex="-1" aria-hidden="true">
+          <div class="frame">
+            <div class="frame-bar"><i></i><i></i><i></i><span>translate.py --attention</span></div>
+            <div class="frame-media"><img src="assets/projects/transformer/cover.webp" width="1600" height="900" loading="lazy" alt="Cross-attention map for an English to Burmese translation, showing off-diagonal alignment from word reordering" data-label="Cover: the attention map from translate.py --attention"></div>
+          </div>
+        </a>
+        <div class="feature-body">
+          <div class="feature-top"><span class="badge">AI / ML</span></div>
+          <h3 id="f-transformer"><a href="projects/transformer.html">Transformer from Scratch</a></h3>
+          <p class="feature-summary">The encoder-decoder model from "Attention Is All You Need", written in plain PyTorch layers and trained to translate English into Burmese, then compared against PyTorch's own implementation.</p>
+          <dl class="facts">
+            <div class="fact"><dt>Focus</dt><dd>Multi-head attention, masking, positional encoding, custom BPE tokenizer, evaluation.</dd></div>
+            <div class="fact"><dt>Built with</dt><dd><ul class="tags"><li class="tag">PyTorch</li><li class="tag">Python</li><li class="tag">BPE</li><li class="tag">Jupyter</li></ul></dd></div>
+            <div class="fact"><dt>Result</dt><dd><strong>chrF 29.1</strong> vs 33.5 for the reference at matched size, with the gap traced to a measured initialisation difference.</dd></div>
+          </dl>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="projects/transformer.html">View Case Study</a>
+            <a class="btn" href="https://github.com/Arkar-MyintMyat/Transformer_Basic" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="more-head">
+      <h3>More projects</h3>
+    </div>
+    <div class="grid-3">
+      <article class="pcard reveal">
+        <div class="frame frame-sm"><div class="frame-media"><img src="assets/projects/heart-disease/thumb.webp" width="940" height="529" loading="lazy" alt="SHAP beeswarm plot: ca, cp, thal and oldpeak have the largest effect on the disease prediction" data-label="Thumbnail: SHAP beeswarm, top features"></div></div>
+        <div class="pcard-body">
+          <div class="pcard-top"><span>Machine Learning</span><span>Bachelor's thesis</span></div>
+          <h4><a href="projects/heart-disease.html">Explainable Heart Disease Risk Prediction</a></h4>
+          <p>Random Forest vs Logistic Regression on clinical data, explained with SHAP, LIME and coefficients.</p>
+          <p class="result"><b>0.950</b> ROC-AUC · <b>90.5%</b> recall (test set)</p>
+          <div class="pcard-foot"><ul class="tags"><li class="tag">scikit-learn</li><li class="tag">SHAP</li><li class="tag">LIME</li></ul>
+            <div class="links"><a href="https://oulurepo.oulu.fi/handle/10024/63492" target="_blank" rel="noopener">Thesis ↗</a><a href="https://github.com/Arkar-MyintMyat/Heartdisease_riskprediction_experiment" target="_blank" rel="noopener">GitHub ↗</a></div></div>
+        </div>
+      </article>
+      <article class="pcard reveal">
+        <div class="frame frame-sm"><div class="frame-media"><img src="assets/projects/migrainemsense/cover.webp" width="1600" height="900" loading="lazy" alt="MigraineMSense app showing a predicted risk score and contributing factors" data-label="Cover: app risk screen"></div></div>
+        <div class="pcard-body">
+          <div class="pcard-top"><span>Mobile · AI/ML</span><span>Junction 2025</span></div>
+          <h4><a href="projects/migrainemsense.html">MigraineMSense</a></h4>
+          <p>An LSTM forecasts next-hour migraine risk from 24 hours of signals; a React Native app shows the score and its causes.</p>
+          <p class="result"><b>End-to-end</b>: data pipeline → LSTM → REST API → mobile app</p>
+          <div class="pcard-foot"><ul class="tags"><li class="tag">TensorFlow</li><li class="tag">React Native</li><li class="tag">Express.js</li></ul>
+            <div class="links"><a href="https://youtube.com/shorts/_LTbAN0v-o4" target="_blank" rel="noopener">Demo ↗</a></div></div>
+        </div>
+      </article>
+      <article class="pcard reveal">
+        <div class="frame frame-sm"><div class="frame-media"><img src="assets/projects/king-of-cards/cover.webp" width="1600" height="900" loading="lazy" alt="King of Cards gameplay" data-label="Cover: King of Cards gameplay"></div></div>
+        <div class="pcard-body">
+          <div class="pcard-top"><span>Game Development</span><span>Shipped</span></div>
+          <h4><a href="projects/king-of-cards.html">King of Cards</a></h4>
+          <p>A Unity game built by a team of three. I worked on scenes, implementation and testing through to release.</p>
+          <p class="result"><b>Released on Steam</b></p>
+          <div class="pcard-foot"><ul class="tags"><li class="tag">Unity</li><li class="tag">C#</li><li class="tag">QA</li></ul>
+            <div class="links"><a href="https://store.steampowered.com/app/3299520/King_of_Cards/" target="_blank" rel="noopener">Steam ↗</a></div></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============================== CONTACT ============================== -->
+  <section class="contact reveal" id="contact" aria-labelledby="contact-title">
+    <div>
+      <h2 id="contact-title">Contact</h2>
+      <p>Let's talk engineering. I'm happy to hear about software engineering, backend or AI/ML opportunities, or to talk through any of these projects in more depth.</p>
+    </div>
+    <ul class="contact-list">
+      <li class="has-copy">
+        <a href="mailto:Arkarmyt999@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Email<span class="val">Arkarmyt999@gmail.com</span></a>
+        <button class="copy-btn" type="button" data-copy="Arkarmyt999@gmail.com" aria-label="Copy email address" title="Copy email address">
+          <svg class="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+          <svg class="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          <span class="copy-tip" role="status" aria-live="polite"></span>
+        </button>
+      </li>
+      <li><a href="https://linkedin.com/in/arkar-myint-myat07" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>LinkedIn<span class="val">arkar-myint-myat07</span></a></li>
+      <li><a href="https://github.com/Arkar-MyintMyat" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>GitHub<span class="val">Arkar-MyintMyat</span></a></li>
+      <li><a href="assets/cv/Arkar_Myint_Myat_Resume.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>Resume (PDF)<span class="val">View</span></a></li>
+    </ul>
+  </section>
+  </div><!-- /.home-main -->
+</div><!-- /.home -->
+</main>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <span>© <span data-year>2026</span> Arkar Myint Myat · Oulu, Finland</span>
+    <nav aria-label="Footer"><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="assets/cv/Arkar_Myint_Myat_Resume.pdf" target="_blank" rel="noopener">Resume</a></nav>
+  </div>
+</footer>
+</body>
+</html>

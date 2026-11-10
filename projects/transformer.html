@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Transformer from Scratch · Arkar Myint Myat</title>
+<meta name="description" content="Case study: the Attention Is All You Need Transformer rebuilt in plain PyTorch for English to Burmese translation, compared against nn.Transformer.">
+<meta name="theme-color" content="#0a0f1a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Transformer from Scratch · Case study">
+<meta property="og:description" content="Case study: the Attention Is All You Need Transformer rebuilt in plain PyTorch for English to Burmese translation, compared against nn.Transformer.">
+<meta property="og:image" content="../assets/projects/transformer/cover.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237ea6ff'/%3E%3Ctext x='32' y='41' font-family='monospace' font-size='26' font-weight='700' text-anchor='middle' fill='%2308111f'%3EAM%3C/text%3E%3C/svg%3E">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/css/styles.css">
+<script src="../assets/js/main.js" defer></script>
+</head>
+<body class="page-cs">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="container">
+  <div class="nav-shell">
+    <a class="brand" href="../index.html" aria-label="Arkar Myint Myat, home"><span>Arkar Myint Myat</span></a>
+    <nav aria-label="Primary">
+      <ul class="nav-links" id="nav-links">
+        <li><a href="../index.html#projects" aria-current="page">Projects</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#skills">Skills</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+        <li><a href="../assets/cv/Arkar_Myint_Myat_Resume.pdf" target="_blank" rel="noopener">Resume</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <a class="icon-btn" href="https://github.com/Arkar-MyintMyat" target="_blank" rel="noopener" aria-label="GitHub profile"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg></a>
+      <a class="icon-btn" href="https://linkedin.com/in/arkar-myint-myat07" target="_blank" rel="noopener" aria-label="LinkedIn profile"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Switch colour theme">
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      <a class="btn btn-sm nav-cv" href="../assets/cv/Arkar_Myint_Myat_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="nav-links" aria-expanded="false" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  </div>
+</header>
+
+<div class="container cs-page">
+<aside class="cs-side" aria-label="Site">
+  <div class="cs-side-inner">
+    <a class="btn back-btn" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Back</a>
+    <a class="side-brand" href="../index.html"><img src="../assets/img/arkar.webp" width="720" height="720" alt=""><span><b>Arkar Myint Myat</b><small>Software Engineering · Oulu</small></span></a>
+    <nav class="toc" aria-label="On this page">
+        <ol>
+          <li><a href="#problem">Problem</a></li>
+          <li><a href="#solution">Solution</a></li>
+          <li><a href="#contribution">My contribution</a></li>
+          <li><a href="#implementation">Technical implementation</a></li>
+          <li><a href="#visuals">Results &amp; visuals</a></li>
+          <li><a href="#decisions">Challenges &amp; decisions</a></li>
+          <li><a href="#results">Lessons</a></li>
+        </ol>
+    </nav>
+    <div class="side-foot">
+      <a class="btn btn-primary btn-sm" href="../assets/cv/Arkar_Myint_Myat_Resume.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>Resume</a>
+      <div class="side-icons">
+        <a class="icon-btn" href="https://github.com/Arkar-MyintMyat" target="_blank" rel="noopener" aria-label="GitHub profile"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg></a>
+        <a class="icon-btn" href="https://linkedin.com/in/arkar-myint-myat07" target="_blank" rel="noopener" aria-label="LinkedIn profile"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+        <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Switch colour theme">
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<main id="main" class="cs-main">
+  <a class="btn back-btn back-btn-inline" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Back</a>
+
+  <header class="cs-hero">
+    <div class="cs-hero-head">
+      <div class="feature-top"><span class="badge">AI / ML</span><span class="badge">Research project</span></div>
+      <h1>Transformer from Scratch</h1>
+      <p class="lede">The encoder-decoder model from "Attention Is All You Need" (Vaswani et al., 2017), built only from basic PyTorch parts and trained to translate English into Burmese. It doesn't use <code>nn.Transformer</code> or <code>nn.MultiheadAttention</code>, because those are what the project recreates.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="https://github.com/Arkar-MyintMyat/Transformer_Basic" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+    <dl class="tldr" aria-label="Summary">
+      <div class="tldr-item"><dt><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>Problem</dt><dd>Can a Transformer written by hand from the paper match PyTorch’s own on English → Burmese?</dd></div>
+      <div class="tldr-item"><dt><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg>What I built</dt><dd>The full encoder-decoder from basic PyTorch layers, with a custom BPE tokenizer and evaluation metrics.</dd></div>
+      <div class="tldr-item"><dt><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Result</dt><dd><strong>chrF 29.1 vs 33.5</strong> at matched size, with the gap traced to a measured initialisation difference.</dd></div>
+    </dl>
+    <dl class="cs-meta">
+      <div><dt>My role</dt><dd>Design, implementation, data pipeline, evaluation</dd></div>
+      <div><dt>Team</dt><dd>Individual project</dd></div>
+      <div><dt>Timeline</dt><dd>10 Aug – 5 Sep 2026</dd></div>
+      <div><dt>Stack</dt><dd>Python, PyTorch, custom BPE, Jupyter</dd></div>
+    </dl>
+    <figure class="shot">
+      <div class="frame">
+        <div class="frame-bar"><i></i><i></i><i></i><span>python translate.py --attention</span></div>
+        <div class="frame-media contain"><img src="../assets/projects/transformer/cover.webp" width="1600" height="900" alt="Cross-attention map showing English to Burmese word alignment" data-label="Hero: attention map from translate.py --attention" data-zoom></div>
+      </div>
+    </figure>
+  </header>
+
+    <div class="cs-content">
+      <section class="cs-section" id="problem" aria-labelledby="h-problem">
+        <h2 id="h-problem">Problem</h2>
+        <div class="prose">
+          <p class="lead-in">Can a Transformer written by hand, from the paper, actually learn to translate, and how close does it get to the reference implementation?</p>
+          <p>English to Burmese is a demanding test. English is <strong>subject-verb-object</strong>; Burmese is <strong>subject-object-verb</strong> and adds particles with no English counterpart. A model that copies words left to right would score zero, so attention has to do real reordering.</p>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>English input</th><th>Model output (Burmese)</th></tr></thead>
+            <tbody>
+              <tr><td>i write the letter</td><td class="my" lang="my">ကျွန်တော် စာ ကို ရေး တယ်</td></tr>
+              <tr><td>the teacher does not eat fish</td><td class="my" lang="my">ဆရာ က ငါး ကို မ စား ဘူး</td></tr>
+              <tr><td>she will go to the market tomorrow</td><td class="my" lang="my">သူမ မနက်ဖြန် ဈေး ကို သွား မယ်</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="subtle" style="font-size:.85rem">ကို marks the object and တယ် marks tense; neither appears in the English input. Examples from the generated corpus (Part 1).</p>
+      </section>
+
+      <section class="cs-section" id="solution" aria-labelledby="h-solution">
+        <h2 id="h-solution">Solution</h2>
+        <div class="prose"><p>Two stages: prove the architecture is correct on a controlled corpus, then train the same model on real human-translated text and compare it fairly against PyTorch's implementation.</p></div>
+        <ul class="features-list">
+          <li><b>Part 1 · Controlled corpus</b><span>Generated from a ~110-word bilingual lexicon and 12 Burmese grammar templates, to verify reordering and particles.</span></li>
+          <li><b>Part 2 · Real corpus</b><span>ALT English–Myanmar: 18,082 human-translated news pairs (CC BY 4.0).</span></li>
+          <li><b>Fair baseline</b><span>Same network built from <code>torch.nn.Transformer</code>: same data, config, schedule and seed.</span></li>
+          <li><b>Readable code</b><span>Every file runs on its own and prints what it's doing.</span></li>
+        </ul>
+      </section>
+
+      <section class="cs-section" id="contribution" aria-labelledby="h-contribution">
+        <h2 id="h-contribution">My contribution</h2>
+        <div class="role-card me">
+          <h3>Individual project: everything below is my work</h3>
+          <ul>
+            <li>Recreated the original Transformer: <strong>multi-head attention, masking, positional encoding</strong>, encoder and decoder stacks, and training.</li>
+            <li>Prepared <strong>18,082 bilingual sentence pairs</strong> with data cleaning and <strong>byte-pair encoding</strong>.</li>
+            <li>Compared the model with the PyTorch Transformer baseline using <strong>BLEU and chrF</strong>, and investigated the performance difference.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="cs-section" id="implementation" aria-labelledby="h-impl">
+        <h2 id="h-impl">Technical implementation</h2>
+        <div class="diagram" role="img" aria-label="Pipeline: raw corpus to normalize and filter, to BPE tokenizer, to encoder with self-attention, to decoder with masked self-attention and cross-attention, to greedy decoding and evaluation">
+          <p class="diagram-title">Data &amp; model pipeline</p>
+          <div class="flow">
+            <div class="node"><b>corpus.py</b><small>acquire · NFC normalize · filter · split 90/5/5</small></div>
+            <div class="edge"></div>
+            <div class="node"><b>bpe.py</b><small>BPE from scratch · 8,000 tokens</small></div>
+            <div class="edge"></div>
+            <div class="node key"><b>model.py</b><small>encoder self-attn · decoder masked self-attn + cross-attn</small></div>
+            <div class="edge"></div>
+            <div class="node"><b>train_real.py</b><small>teacher forcing · warm-up schedule</small></div>
+            <div class="edge"></div>
+            <div class="node"><b>metrics.py</b><small>BLEU · chrF · TER · ROUGE-L · METEOR</small></div>
+          </div>
+        </div>
+        <div class="prose">
+          <h3>Model</h3>
+          <ul>
+            <li>Built from <code>nn.Linear</code>, <code>nn.LayerNorm</code>, <code>nn.Dropout</code> and <code>nn.Embedding</code> only.</li>
+            <li>Sinusoidal positional encoding, padding masks, look-ahead masks for the decoder, residual connections.</li>
+            <li>Cross-attention is the only place the English sentence enters the decoder; attention maps can be drawn with <code>translate.py --attention</code>.</li>
+            <li>Autoregressive generation one token at a time until <code>&lt;eos&gt;</code>.</li>
+          </ul>
+          <h3>Data processing</h3>
+          <ul>
+            <li>Deduplicated <em>before</em> splitting, with zero source overlap verified between train, dev and test.</li>
+            <li>Unicode NFC normalization, essential for Burmese (see below).</li>
+            <li><code>BPETokenizer</code> exposes the same interface as the old word vocabulary, so the model and data loader didn't change.</li>
+          </ul>
+        </div>
+        <div class="kpis">
+          <div class="kpi"><b>13,237</b><span>of 18,082 Burmese lines were not in canonical Unicode order</span></div>
+          <div class="kpi"><b>69%</b><span>of Burmese word types appear only once</span></div>
+          <div class="kpi"><b>8,000</b><span>BPE tokens instead of 63,887 word-level rows</span></div>
+        </div>
+      </section>
+
+      <section class="cs-section" id="visuals" aria-labelledby="h-visuals">
+        <h2 id="h-visuals">Results &amp; visuals</h2>
+
+        <div class="chart">
+          <div class="chart-head">
+            <h3>Real corpus: from scratch vs <code>nn.Transformer</code></h3>
+            <ul class="legend"><li><i class="s1"></i>From scratch</li><li><i class="s2"></i>nn.Transformer</li></ul>
+          </div>
+          <div class="bars" role="img" aria-label="Scores out of 100. chrF: from scratch 29.1, reference 33.5. ROUGE-L: 23.5 vs 26.5. METEOR: 18.8 vs 22.6. BLEU: 2.0 vs 3.6.">
+            <div class="bar-group"><span>chrF <small>higher is better</small></span><div class="bar-pair">
+              <div class="bar-track"><span class="bar s1" style="width:29.1%" tabindex="0" data-tip="From scratch · chrF 29.1"><span class="bar-val">29.1</span></span></div>
+              <div class="bar-track"><span class="bar s2" style="width:33.5%" tabindex="0" data-tip="nn.Transformer · chrF 33.5"><span class="bar-val">33.5</span></span></div></div></div>
+            <div class="bar-group"><span>ROUGE-L <small>higher is better</small></span><div class="bar-pair">
+              <div class="bar-track"><span class="bar s1" style="width:23.5%" tabindex="0" data-tip="From scratch · ROUGE-L 23.5"><span class="bar-val">23.5</span></span></div>
+              <div class="bar-track"><span class="bar s2" style="width:26.5%" tabindex="0" data-tip="nn.Transformer · ROUGE-L 26.5"><span class="bar-val">26.5</span></span></div></div></div>
+            <div class="bar-group"><span>METEOR <small>higher is better</small></span><div class="bar-pair">
+              <div class="bar-track"><span class="bar s1" style="width:18.8%" tabindex="0" data-tip="From scratch · METEOR 18.8"><span class="bar-val">18.8</span></span></div>
+              <div class="bar-track"><span class="bar s2" style="width:22.6%" tabindex="0" data-tip="nn.Transformer · METEOR 22.6"><span class="bar-val">22.6</span></span></div></div></div>
+            <div class="bar-group"><span>BLEU <small>higher is better</small></span><div class="bar-pair">
+              <div class="bar-track"><span class="bar s1" style="width:2%" tabindex="0" data-tip="From scratch · BLEU 2.0"><span class="bar-val">2.0</span></span></div>
+              <div class="bar-track"><span class="bar s2" style="width:3.6%" tabindex="0" data-tip="nn.Transformer · BLEU 3.6"><span class="bar-val">3.6</span></span></div></div></div>
+          </div>
+          <div class="axis" aria-hidden="true"><span></span><div><span>0</span><span>25</span><span>50</span><span>75</span><span>100</span></div></div>
+          <p class="chart-note">18 epochs · 16,199 training pairs · one laptop GPU · test set untouched until the end.</p>
+        </div>
+
+        <details class="table-toggle">
+          <summary>View all metrics as a table</summary>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Metric</th><th class="num">From scratch</th><th class="num">nn.Transformer</th></tr></thead>
+              <tbody>
+                <tr><td>BLEU ↑</td><td class="num">2.0</td><td class="num best">3.6</td></tr>
+                <tr><td>chrF ↑</td><td class="num">29.1</td><td class="num best">33.5</td></tr>
+                <tr><td>TER ↓</td><td class="num">100.0</td><td class="num best">92.8</td></tr>
+                <tr><td>ROUGE-L ↑</td><td class="num">23.5</td><td class="num best">26.5</td></tr>
+                <tr><td>METEOR ↑</td><td class="num">18.8</td><td class="num best">22.6</td></tr>
+                <tr><td>Length ratio (1.0 ideal)</td><td class="num">1.11</td><td class="num best">1.02</td></tr>
+                <tr><td>Parameters</td><td class="num">4,468,544</td><td class="num">4,469,056</td></tr>
+                <tr><td>Training time</td><td class="num best">9.3 min</td><td class="num">14.2 min</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Part 1 · generated corpus</th><th class="num">Random split</th><th class="num">Compositional split</th></tr></thead>
+            <tbody>
+              <tr><td>Test sentences</td><td class="num">1,200</td><td class="num">380</td></tr>
+              <tr><td>BLEU</td><td class="num">99.8</td><td class="num best">99.7</td></tr>
+              <tr><td>Sentences exactly right</td><td class="num">99.5%</td><td class="num best">98.9%</td></tr>
+              <tr><td>Training time</td><td class="num">8.2 min</td><td class="num">5.9 min</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="gallery">
+          <figure class="shot wide">
+            <div class="frame frame-sm"><div class="frame-media natural"><img src="../assets/projects/transformer/training-curve.webp" width="1422" height="366" loading="lazy" alt="Three training plots over 18 epochs: train and dev loss, dev BLEU and dev chrF, for the from-scratch model and PyTorch nn.Transformer. The reference model stays ahead on all three." data-label="Train / dev curves (from notebook.ipynb)" data-zoom></div></div>
+            <figcaption><b>Training curves</b> from <code>notebook.ipynb</code>, 18 epochs. Solid lines are train loss and dashed lines are dev loss. Both models learn steadily and dev loss flattens after the first epochs, while <code>nn.Transformer</code> stays ahead on BLEU and chrF.</figcaption>
+          </figure>
+          <figure class="shot wide">
+            <div class="term">
+              <div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>notebook.ipynb · tracing the gap</span></div>
+<pre><span class="t-dim"># same seed, same config, both models</span>
+W_q     = ours_m.encoder_layers[0].self_attn.W_q.weight
+in_proj = theirs_m.transformer.encoder.layers[0].self_attn.in_proj_weight
+
+<span class="t-prompt">Out:</span>
+ours   W_q            shape (128, 128)   measured std <span class="t-str">0.08824</span>
+torch  in_proj_weight shape (384, 128)   measured std <span class="t-str">0.06241</span>
+
+xavier predicts sqrt(2 / (fan_in + fan_out)):
+   ours  (128 + 128) -&gt; 0.08839
+   torch (384 + 128) -&gt; 0.06250
+
+<span class="t-key">Our attention weights start 1.414x wider than PyTorch's.</span></pre>
+            </div>
+            <figcaption><b>Tracing the gap.</b> The measured weight spread matches what Xavier initialisation predicts for each matrix shape. Packing Q, K and V into one 384×128 matrix changes the fan-in, so the from-scratch model starts with attention weights √2 wider.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="cs-section" id="decisions" aria-labelledby="h-decisions">
+        <h2 id="h-decisions">Challenges &amp; decisions</h2>
+        <div class="decisions">
+          <article class="decision">
+            <h3>Burmese text silently split the vocabulary</h3>
+            <dl>
+              <div><dt>Challenge</dt><dd>Burmese allows several storage orders for the same combining marks. They render identically, so 13,237 lines would have created duplicate "words".</dd></div>
+              <div><dt>Decision</dt><dd>Apply NFC normalization as an explicit, auditable pipeline stage.</dd></div>
+            </dl>
+          </article>
+          <article class="decision">
+            <h3>Word-level vocabulary couldn't learn</h3>
+            <dl>
+              <div><dt>Challenge</dt><dd>69% of Burmese word types appear once, and a word seen once can't be learned.</dd></div>
+              <div><dt>Decision</dt><dd>Implement BPE from scratch (no sentencepiece): 8,000 tokens instead of 63,887 rows, with an effectively zero unknown-token rate.</dd></div>
+              <div><dt>Why</dt><dd>The measurement, not a preference, drove the change.</dd></div>
+            </dl>
+          </article>
+          <article class="decision">
+            <h3>The reference model scored higher. Why?</h3>
+            <dl>
+              <div><dt>Finding</dt><dd>Both use Xavier initialisation, but my version keeps Q, K and V as three 128×128 layers while PyTorch packs them into one 384×128 matrix. Same rule, different fan-in, so my attention weights start √2 ≈ 1.414× wider.</dd></div>
+              <div><dt>Conclusion</dt><dd>Not a bug in either. The from-scratch model trains stably at a matched parameter count; the remaining gap is attributable to a specific, measured difference.</dd></div>
+            </dl>
+          </article>
+        </div>
+      </section>
+
+      <section class="cs-section" id="results" aria-labelledby="h-results">
+        <h2 id="h-results">Lessons</h2>
+        <div class="kpis">
+          <div class="kpi"><b>99.7</b><span>BLEU on the compositional split of the generated corpus</span></div>
+          <div class="kpi"><b>29.1</b><span>chrF on real news text vs 33.5 for the reference</span></div>
+          <div class="kpi"><b>0.011%</b><span>parameter difference between the two models</span></div>
+        </div>
+        <div class="prose">
+          <h3>What I learned</h3>
+          <ul>
+            <li>The same architecture scores ~100 BLEU on a rule-generated corpus and ~2 on real language. That gap is exactly what a synthetic dataset hides.</li>
+            <li>For Burmese, chrF is the honest headline: the model produces substantially correct characters while rarely matching an exact 4-gram, which BLEU reports badly.</li>
+            <li>When a result disagrees with a reference, trace the cause and measure it instead of guessing.</li>
+          </ul>
+          <h3>What I'd improve next</h3>
+          <ul>
+            <li>Initialise Q/K/V with the packed fan and retrain, to confirm the gap closes.</li>
+            <li>Train on a larger parallel corpus; 16k pairs is very small for neural machine translation.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="next" aria-label="More projects">
+        <a href="ml-kem.html"><span>← Previous</span><b>ML-KEM Legacy Modernization</b></a>
+        <a class="to-next" href="heart-disease.html"><span>Next project →</span><b>Explainable Heart Disease Risk</b></a>
+      </nav>
+      <div class="cs-end"><a class="btn back-btn" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Back</a></div>
+    </div>
+</main>
+</div>
+
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <span>© <span data-year>2026</span> Arkar Myint Myat · Oulu, Finland</span>
+    <nav aria-label="Footer"><a href="../index.html#projects">Projects</a><a href="../index.html#contact">Contact</a><a href="../assets/cv/Arkar_Myint_Myat_Resume.pdf" target="_blank" rel="noopener">Resume</a></nav>
+  </div>
+</footer>
+</body>
+</html>

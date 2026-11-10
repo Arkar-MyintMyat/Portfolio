@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Stakes by Kaleva · Arkar Myint Myat</title>
+<meta name="description" content="Case study: Stakes by Kaleva re-simulates the Liiga season after every goal and publishes AI stories where code checks every number. 2nd place, JunctionX Oulu 2026.">
+<meta name="theme-color" content="#0a0f1a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Stakes by Kaleva · Case study">
+<meta property="og:description" content="Case study: Stakes by Kaleva re-simulates the Liiga season after every goal and publishes AI stories where code checks every number. 2nd place, JunctionX Oulu 2026.">
+<meta property="og:image" content="../assets/projects/stakes/cover.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237ea6ff'/%3E%3Ctext x='32' y='41' font-family='monospace' font-size='26' font-weight='700' text-anchor='middle' fill='%2308111f'%3EAM%3C/text%3E%3C/svg%3E">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/css/styles.css">
+<script src="../assets/js/main.js" defer></script>
+</head>
+<body class="page-cs">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="container">
+  <div class="nav-shell">
+    <a class="brand" href="../index.html" aria-label="Arkar Myint Myat, home"><span>Arkar Myint Myat</span></a>
+    <nav aria-label="Primary">
+      <ul class="nav-links" id="nav-links">
+        <li><a href="../index.html#projects" aria-current="page">Projects</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#skills">Skills</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+        <li><a href="../assets/cv/Arkar_Myint_Myat_Resume.pdf" target="_blank" rel="noopener">Resume</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <a class="icon-btn" href="https://github.com/Arkar-MyintMyat" target="_blank" rel="noopener" aria-label="GitHub profile"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg></a>
+      <a class="icon-btn" href="https://linkedin.com/in/arkar-myint-myat07" target="_blank" rel="noopener" aria-label="LinkedIn profile"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Switch colour theme">
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      <a class="btn btn-sm nav-cv" href="../assets/cv/Arkar_Myint_Myat_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="nav-links" aria-expanded="false" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  </div>
+</header>
+
+<div class="container cs-page">
+<aside class="cs-side" aria-label="Site">
+  <div class="cs-side-inner">
+    <a class="btn back-btn" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Back</a>
+    <a class="side-brand" href="../index.html"><img src="../assets/img/arkar.webp" width="720" height="720" alt=""><span><b>Arkar Myint Myat</b><small>Software Engineering · Oulu</small></span></a>
+    <nav class="toc" aria-label="On this page">
+        <ol>
+          <li><a href="#problem">Problem</a></li>
+          <li><a href="#solution">Solution</a></li>
+          <li><a href="#contribution">My contribution</a></li>
+          <li><a href="#implementation">Technical implementation</a></li>
+          <li><a href="#visuals">Visual walkthrough</a></li>
+          <li><a href="#decisions">Challenges &amp; decisions</a></li>
+          <li><a href="#results">Results &amp; lessons</a></li>
+        </ol>
+    </nav>
+    <div class="side-foot">
+      <a class="btn btn-primary btn-sm" href="../assets/cv/Arkar_Myint_Myat_Resume.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>Resume</a>
+      <div class="side-icons">
+        <a class="icon-btn" href="https://github.com/Arkar-MyintMyat" target="_blank" rel="noopener" aria-label="GitHub profile"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg></a>
+        <a class="icon-btn" href="https://linkedin.com/in/arkar-myint-myat07" target="_blank" rel="noopener" aria-label="LinkedIn profile"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+        <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Switch colour theme">
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<main id="main" class="cs-main">
+  <a class="btn back-btn back-btn-inline" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Back</a>
+
+  <header class="cs-hero">
+    <div class="cs-hero-head">
+      <div class="feature-top"><span class="badge">Full Stack · AI</span><span class="badge badge-win">2nd place · JunctionX Oulu 2026</span></div>
+      <h1>Stakes by Kaleva</h1>
+      <p class="lede">The scoreboard tells you the score; Stakes tells you what it was worth. After every goal it re-simulates the rest of the Liiga regular season, shows how every team's playoff chance moved, and an AI newsroom turns those numbers into short fan stories. Code checks every number before anything is published. Built in 24 hours for Kaleva Media's sports content challenge.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="https://panokset.vercel.app/" target="_blank" rel="noopener">Live Demo <span aria-hidden="true">↗</span></a>
+        <a class="btn" href="https://github.com/Arkar-MyintMyat/JunctionXOulu-Hackathon-" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+    <dl class="tldr" aria-label="Summary">
+      <div class="tldr-item"><dt><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>Problem</dt><dd>Sports coverage shows scores, not what they mean, and AI-written copy invents numbers.</dd></div>
+      <div class="tldr-item"><dt><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg>What I built</dt><dd>A simulation engine that re-runs the Liiga season after every goal, plus AI stories that code checks before publishing.</dd></div>
+      <div class="tldr-item"><dt><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Result</dt><dd><strong>2nd place</strong> at JunctionX Oulu 2026, built in 24 hours.</dd></div>
+    </dl>
+    <dl class="cs-meta">
+      <div><dt>My role</dt><dd>Backend, simulation logic, AI stories</dd></div>
+      <div><dt>Team</dt><dd>3 people</dd></div>
+      <div><dt>Timeline</dt><dd>23 – 25 Oct 2026 · hackathon</dd></div>
+      <div><dt>Stack</dt><dd>Python, FastAPI, LLM API, Next.js</dd></div>
+    </dl>
+    <figure class="shot">
+      <div class="frame">
+        <div class="frame-bar"><i></i><i></i><i></i><span>panokset.vercel.app</span></div>
+        <div class="frame-media"><img src="../assets/projects/stakes/cover.webp" width="1600" height="900" alt="The Stakes widget in a Kaleva match article" data-label="Hero: the Stakes widget in the Kaleva match article" data-zoom></div>
+      </div>
+    </figure>
+  </header>
+
+    <div class="cs-content">
+      <section class="cs-section" id="problem" aria-labelledby="h-problem">
+        <h2 id="h-problem">Problem</h2>
+        <div class="prose">
+          <p class="lead-in">Sports sites report results but rarely explain consequences.</p>
+          <p>A goal in a mid-table game can swing a rival's playoff chance by ten points, and nobody tells that rival's fans. Kaleva Media's challenge asked for sports content that goes <strong>beyond the scoreboard</strong>.</p>
+          <p>AI could write that content cheaply, but language models invent numbers. A newspaper cannot publish a story with a made-up statistic, so any AI output had to be verifiable.</p>
+        </div>
+      </section>
+
+      <section class="cs-section" id="solution" aria-labelledby="h-solution">
+        <h2 id="h-solution">Solution</h2>
+        <div class="prose"><p>A probability engine plus a verified AI newsroom, delivered across the moments a fan cares about.</p></div>
+        <ul class="features-list">
+          <li><b>Before the game</b><span>What tonight is worth: each team's playoff chance after a win and after a loss.</span></li>
+          <li><b>During the game</b><span>Alerts such as "That goal cost Kärpät 10 points", even when your team isn't playing.</span></li>
+          <li><b>After the game</b><span>An article widget: the playoff line jumps at every goal and the table re-sorts.</span></li>
+          <li><b>Between games</b><span>A scenario explorer: pick upcoming results and see the odds change.</span></li>
+          <li><b>In the newsroom</b><span>An editor queue showing what the checker held back, and why.</span></li>
+        </ul>
+      </section>
+
+      <section class="cs-section" id="contribution" aria-labelledby="h-contribution">
+        <h2 id="h-contribution">My contribution</h2>
+        <div class="split">
+          <div class="role-card me">
+            <h3>What I built</h3>
+            <ul>
+              <li>Backend services for the platform.</li>
+              <li>The <strong>Matchstake simulation logic</strong> that updates every team's playoff probability as match outcomes change.</li>
+              <li>Integration of sports data APIs to support interactive what-if scenarios and live match analysis.</li>
+              <li><strong>AI-generated post-game articles</strong> with fact-checking rules that flag unsupported claims.</li>
+            </ul>
+          </div>
+          <div class="role-card">
+            <h3>Shared with the team</h3>
+            <ul>
+              <li>Product concept and pitch for the Kaleva challenge.</li>
+              <li>Next.js frontend: article widget, alerts, scenario explorer and editor queue.</li>
+              <li>Kaleva article mock-up and deployment for the demo.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="cs-section" id="implementation" aria-labelledby="h-impl">
+        <h2 id="h-impl">Technical implementation</h2>
+        <div class="diagram" role="img" aria-label="Architecture. Odds path: Liiga API to loader, to simulate and replay, to odds JSON, to FastAPI. Story path: fact sheets built by code, to LLM writer, to rule-based checker, to verified stories or editor queue. FastAPI serves the Next.js widget.">
+          <p class="diagram-title">System architecture</p>
+          <div class="flow">
+            <div class="node"><b>Liiga API</b><small>matches, standings</small></div>
+            <div class="edge"><small>loader</small></div>
+            <div class="node key mine"><b>Simulate + replay</b><small>10,000 seasons per moment</small></div>
+            <div class="edge"><small>JSON</small></div>
+            <div class="node mine"><b>FastAPI</b><small>odds + facts + stories</small></div>
+            <div class="edge"><small>REST</small></div>
+            <div class="node"><b>Next.js</b><small>widget, alerts, explorer</small></div>
+          </div>
+          <div class="flow">
+            <div class="node"><b>Fact sheets</b><small>built by code, labelled + sourced</small></div>
+            <div class="edge"><small>placeholders</small></div>
+            <div class="node mine"><b>LLM writer</b><small>words only, no numbers</small></div>
+            <div class="edge"><small>draft</small></div>
+            <div class="node key mine"><b>Checker</b><small>plain code, 5 rules</small></div>
+            <div class="edge"><small>pass / block</small></div>
+            <div class="node"><b>Publish or editor queue</b><small>swings ≥ 25 pts → editor</small></div>
+          </div>
+        </div>
+
+        <h3>Probability model</h3>
+        <div class="prose">
+          <ul>
+            <li>Team attack and defence strength from goals per game, <strong>shrunk toward the league average</strong> to avoid overreacting to small samples.</li>
+            <li>Goals drawn from a <strong>Poisson model</strong> with home advantage; overtime treated as 50/50.</li>
+            <li>Liiga's points and tie-break rules implemented and checked against the real standings; playoff lines read from the standings API.</li>
+            <li>10,000 simulated seasons for every moment in a match replay.</li>
+          </ul>
+        </div>
+
+        <h3>Verified AI stories</h3>
+        <div class="prose">
+          <p>The model writes words around placeholders such as <code>{{e3.ILV.playoff_after}}</code>; every number is filled from a fact sheet built by code. A plain-code checker (no AI) blocks a story if it contains:</p>
+          <ul>
+            <li>a typed number, an unknown fact, or a fact it claims but doesn't show,</li>
+            <li>a name that isn't in the fact sheet,</li>
+            <li>more than 60 words, or banned topics such as betting tips, injuries or guarantees.</li>
+          </ul>
+        </div>
+
+        <h3>API</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Route</th><th>Returns</th></tr></thead>
+            <tbody>
+              <tr><td><code>GET /api/matches</code></td><td>Demo matches</td></tr>
+              <tr><td><code>GET /api/match/{id}</code></td><td>Events with odds for every team, fact sheets, stories</td></tr>
+              <tr><td><code>GET /api/upcoming?team=KAR&amp;n=8</code></td><td>A team's next games</td></tr>
+              <tr><td><code>POST /api/simulate</code></td><td>Odds for every team given picked results (the one live computation)</td></tr>
+              <tr><td><code>GET /api/queue</code></td><td>Stories held for an editor</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Testing</h3>
+        <div class="prose">
+          <ul>
+            <li><code>pytest</code> suite (<code>make test</code>) and a backtest of the model on the previous season (<code>make backtest</code>).</li>
+            <li><code>--inject-error</code> plants a wrong number in an already-verified story to prove the checker catches it.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="cs-section" id="visuals" aria-labelledby="h-visuals">
+        <h2 id="h-visuals">Visual walkthrough</h2>
+        <div class="gallery">
+          <figure class="shot wide">
+            <div class="frame"><div class="frame-media"><img src="../assets/projects/stakes/matchstake.webp" width="1600" height="900" loading="lazy" alt="Playoff-chance line jumping at each goal in game 345" data-label="Matchstake replay: playoff line jumping at each goal (game 345)" data-zoom></div></div>
+            <figcaption><b>Matchstake replay.</b> Demo game 345, Kärpät 2–3 Pelicans (OT). Pelicans' playoff chance moves at every goal, from 68% at kick-off to 73% at full time.</figcaption>
+          </figure>
+          <figure class="shot">
+            <div class="frame frame-sm"><div class="frame-media"><img src="../assets/projects/stakes/scenario.webp" width="1600" height="900" loading="lazy" alt="Scenario explorer with picked results and updated odds" data-label="Scenario explorer (/explorer)" data-zoom></div></div>
+            <figcaption><b>Scenario explorer.</b> Pick results for upcoming games and see every team's odds update via <code>/api/simulate</code>.</figcaption>
+          </figure>
+          <figure class="shot">
+            <div class="frame frame-sm"><div class="frame-media"><img src="../assets/projects/stakes/editor-queue.webp" width="1600" height="900" loading="lazy" alt="Editor queue listing a blocked story and the reason" data-label="Editor queue (/queue)" data-zoom></div></div>
+            <figcaption><b>Editor queue.</b> 10 AI stories for this game: 9 passed every check and published automatically, and 1 was held because it typed "38%" where the fact sheet says 29%. The checker suggests the fix.</figcaption>
+          </figure>
+          <figure class="shot wide">
+            <div class="frame frame-sm"><div class="frame-media natural"><img src="../assets/projects/stakes/frontpage.webp" width="1600" height="619" loading="lazy" alt="What tonight is worth front page" data-label="Front page: what tonight is worth" data-zoom></div></div>
+            <figcaption><b>Before the game.</b> "What tonight is worth" in the match preview: each team's playoff chance before face-off, after a win and after a loss.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="cs-section" id="decisions" aria-labelledby="h-decisions">
+        <h2 id="h-decisions">Challenges &amp; decisions</h2>
+        <div class="decisions">
+          <article class="decision">
+            <h3>Language models invent numbers</h3>
+            <dl>
+              <div><dt>Challenge</dt><dd>A newsroom can't publish AI text that might contain a wrong statistic.</dd></div>
+              <div><dt>Decision</dt><dd>The AI never writes a number. It writes around placeholders, and a deterministic checker, not another model, decides what gets published.</dd></div>
+              <div><dt>Why</dt><dd>Rule-based checks are predictable and testable, so trust doesn't depend on a second model behaving well.</dd></div>
+            </dl>
+          </article>
+          <article class="decision">
+            <h3>Simulation cost vs. page speed</h3>
+            <dl>
+              <div><dt>Challenge</dt><dd>10,000 seasons for every goal is too slow to compute on page load.</dd></div>
+              <div><dt>Decision</dt><dd>Precompute odds, facts and stories to JSON. The web app only plays them back; the explorer's <code>/api/simulate</code> is the one live call.</dd></div>
+              <div><dt>Why</dt><dd>Fast pages, and an offline copy keeps the demo working even when the free backend is asleep.</dd></div>
+            </dl>
+          </article>
+          <article class="decision">
+            <h3>Probabilities people can trust</h3>
+            <dl>
+              <div><dt>Challenge</dt><dd>A wrong standings rule or an overconfident model would mislead readers.</dd></div>
+              <div><dt>Decision</dt><dd>Tie-break rules checked against real standings, the model backtested on last season, every probability labelled "Model estimate", and big swings (≥ 25 points) routed to an editor.</dd></div>
+            </dl>
+          </article>
+        </div>
+      </section>
+
+      <section class="cs-section" id="results" aria-labelledby="h-results">
+        <h2 id="h-results">Results &amp; lessons</h2>
+        <div class="kpis">
+          <div class="kpi win"><b>2nd place</b><span>Beyond the Scoreboard challenge, JunctionX Oulu 2026</span></div>
+          <div class="kpi"><b>10,000</b><span>simulated seasons per moment of a match</span></div>
+          <div class="kpi"><b>0</b><span>numbers written by the AI itself</span></div>
+          <div class="kpi"><b>24 h</b><span>from idea to working demo</span></div>
+        </div>
+        <div class="prose">
+          <h3>What I learned</h3>
+          <ul>
+            <li>Putting AI behind a deterministic check makes its output publishable; the guardrails mattered as much as the model.</li>
+            <li>Precomputing heavy work is what made a hackathon demo feel fast and reliable.</li>
+          </ul>
+          <h3>What I'd improve next</h3>
+          <ul>
+            <li>Stream live match events instead of replaying saved games.</li>
+            <li>Extend the backtest into an ongoing calibration report for the probability model.</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="next" aria-label="More projects">
+        <a href="king-of-cards.html"><span>← Previous</span><b>King of Cards</b></a>
+        <a class="to-next" href="ml-kem.html"><span>Next project →</span><b>ML-KEM Legacy Modernization</b></a>
+      </nav>
+      <div class="cs-end"><a class="btn back-btn" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Back</a></div>
+    </div>
+</main>
+</div>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <span>© <span data-year>2026</span> Arkar Myint Myat · Oulu, Finland</span>
+    <nav aria-label="Footer"><a href="../index.html#projects">Projects</a><a href="../index.html#contact">Contact</a><a href="../assets/cv/Arkar_Myint_Myat_Resume.pdf" target="_blank" rel="noopener">Resume</a></nav>
+  </div>
+</footer>
+</body>
+</html>
